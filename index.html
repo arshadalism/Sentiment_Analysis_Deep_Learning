@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Sentiment Analysis</title>
+    <script src="js/bootstrap.bundle.js"></script>
+    <style>
+        /* Add background image or color */
+        html, body {
+    width: 1000px;
+    height: 850px;
+    margin: 0 auto;
+    background-image: url(image/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Viewport height */
+        }
+
+        .col-sm-6 {
+            width: 100%; /* Ensures it is 100% of the container */
+            max-width: 500px; /* You can set this to the max width you want */
+        }
+    </style>
+</head>
+<body> 
+  
+  <div class="class mt-5">
+      <div class="row text-center">
+          <h1 style="color:rgb(221, 234, 236);"> Sentiment Analysis By Deep Learning </h1>
+      </div>
+  </div>
+  
+  <div class="container-fluid centered-container">
+      <div class="col-sm-6">
+          <div class="row text-center">
+              <div class="col-sm-6 text-center">
+                  <label for="exampleFormControlInput1" class="form-label"></label>
+                  <input type="test" class="form-control text-center" id="inputText" placeholder="Enter your sentence">
+                  <div class="class mt-4">
+                      <button class="btn btn-primary col-12" onclick="analyzeSentiment()">Find The Emotion</button>
+                  </div>
+                  <br/>
+              </div>
+          </div>
+      </div>
+  </div>
+
+<script>
+function analyzeSentiment() {
+    const text = document.getElementById("inputText").value;
+
+    fetch("http://127.0.0.1:8000/predict", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ text: text })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Save the result to localStorage
+        localStorage.setItem("inputText", data.text);
+        localStorage.setItem("prediction", data.sentiment);
+        // Redirect to results page
+        window.location.href = "sec.html";
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Something went wrong. Please try again.");
+    });
+}
+</script>
+</body>
+</html>

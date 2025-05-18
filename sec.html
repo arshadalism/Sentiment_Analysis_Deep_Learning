@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Sentiment Analysis</title>
+    <script src="js/bootstrap.bundle.js"></script>
+    <style>
+        /* Add background image or color */
+        html, body {
+    width: 1000px;
+    height: 850px;
+    margin: 0 auto;
+    background-image: url(image/bg2.jpg);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Viewport height */
+        }
+
+        .col-sm-6 {
+            width: 100%; /* Ensures it is 100% of the container */
+            max-width: 500px; /* You can set this to the max width you want */
+        }
+    </style>
+</head>
+<body> 
+  
+  <div class="class mt-5">
+      <div class="text-center">
+          <h1 style="color:rgb(233, 241, 242);"> Sentiment Analysis </h1>
+      </div>
+  </div>
+  
+  <div class="container-fluid centered-container">
+      <div class="col-sm-6">
+          <div class="row text-center">
+              <h1 style="color:white">Sentence:</h1>
+                <p id="displayInput" style="font-size: 20px; color: #f8f9fa;"></p>
+
+                <h1 style="color:white">Predicted Emotion:</h1>
+                <p id="displayResult" style="font-size: 24px; font-weight: bold; color: #0dcaf0;"></p>
+
+                <div class="mt-4">
+                    <a href="index.html"><button class="btn btn-secondary">Try Another One</button></a>
+                </div>
+          </div>
+      </div>
+  </div>
+<script>
+window.onload = function() {
+    const result = localStorage.getItem("prediction");
+    const input = localStorage.getItem("inputText");
+
+    document.getElementById("displayInput").innerText = input || "No input provided.";
+    document.getElementById("displayResult").innerText = result || "No result available.";
+}
+</script>
+
+  
+</body>
+</html>
